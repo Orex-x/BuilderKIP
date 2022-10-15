@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:BuilderKIP.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="BuilderKIP.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+			xmlns:reactiveUi="http://reactiveui.net"
+        Title="BuilderKIP">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+	<!-- Элемент управления, наблюдающий за RoutingState, 
+             встраивающий подходящее View текущей ViewModel  -->
+	<reactiveUi:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
+		<reactiveUi:RoutedViewHost.DefaultContent>
+			<TextBlock Text="Default Content" />
+		</reactiveUi:RoutedViewHost.DefaultContent>
+	</reactiveUi:RoutedViewHost>
+
+</Window>
