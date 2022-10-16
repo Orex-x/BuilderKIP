@@ -20,6 +20,9 @@ namespace BuilderKIP
             Locator.CurrentMutable.RegisterConstant<IScreen>(new MainWindowViewModel());
             Locator.CurrentMutable.Register<IViewFor<AuthorizationUserControlViewModel>>(() => new AuthorizationUserControl());
             Locator.CurrentMutable.Register<IViewFor<RegistrationUserControlViewModel>>(() => new RegistrationUserControl());
+            Locator.CurrentMutable.Register<IViewFor<ClientHomeUserControlViewModel>>(() => new ClientHomeUserControl());
+            Locator.CurrentMutable.Register<IViewFor<EmployeeHomeUserControlViewModel>>(() => new EmployeeHomeUserControl());
+            Locator.CurrentMutable.Register<IViewFor<BuildingServiceStoreWindowViewModel>>(() => new BuildingServiceStoreWindow());
 
             // Получаем корневую модель представления и инициализируем контекст данных.
             new MainWindow { DataContext = Locator.Current.GetService<IScreen>() }.Show();

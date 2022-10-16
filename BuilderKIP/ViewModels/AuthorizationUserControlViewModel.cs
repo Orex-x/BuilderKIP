@@ -82,7 +82,10 @@ namespace BuilderKIP.ViewModels
                     var employee = listEmployees.FirstOrDefault(x => x.UserId == user.Id); 
 
                     if (Container != null)
-                        Container.GoToHome();
+                    {
+                        if(client != null) Container.GoToHomeClient(client);
+                        if(employee != null) Container.GoToHomeEmployee();
+                    }
                 }
                 else
                 {

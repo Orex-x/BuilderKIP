@@ -17,7 +17,7 @@
              встраивающий подходящее View текущей ViewModel  -->
 	<reactiveUi:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
 		<reactiveUi:RoutedViewHost.DefaultContent>
-			<TextBlock Text="Default Content" />
+			<TextBlock Text="Default Content 123" />
 		</reactiveUi:RoutedViewHost.DefaultContent>
 	</reactiveUi:RoutedViewHost>
 

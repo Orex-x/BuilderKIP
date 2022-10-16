@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BuilderKIP.Views.ClientNewContractPage">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
+			<RowDefinition Height="90"/>
+			<RowDefinition Height="90"/>
+			<RowDefinition Height="40"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<TextBlock Text="ТИПОВОЙ ДОГОВОР НА СТРОИТЕЛЬСТВО" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="26"/>
+
+		<Grid Grid.Row="1" Margin="10">
+			<StackPanel>
+				<TextBlock
+					TextWrapping="Wrap"
+					Text="Заказчик поручает, а Подрядчик принимает на себя обязательства выполнить работы по строительству на участке расположенном по адресу:"/>
+				<TextBox TextWrapping="Wrap" MaxHeight="30" Text="{Binding Address}" Watermark="Адрес"/>
+				<TextBlock TextWrapping="Wrap" Text="предоставленным Заказчиком." />
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="2" Margin="10">
+			<StackPanel>
+				<TextBlock
+					TextWrapping="Wrap"
+					Text="Окончание всех работ с учётом графика платежей к настоящему договору до:"/>
+				<DatePicker MaxHeight="30" SelectedDate="{Binding Deadline}"/>
+				<TextBlock TextWrapping="Wrap" Text="предоставленным Заказчиком." />
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="3" Margin="10">
+			<TextBlock Text="Перечень строительных работ" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Arial" FontSize="22"/>
+		</Grid>
+
+		<Grid Grid.Row="4" Margin="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="90"/>
+					<ColumnDefinition Width="90"/>
+					<ColumnDefinition />
+					<ColumnDefinition Width="90"/>
+				</Grid.ColumnDefinitions>
+				<Button Content="Добавить"  Command="{Binding OnClickAddBuildingService}"/>
+				<Button Grid.Column="1" Content="Удалить" Command="{Binding OnClickDeleteBuildingService}"/>
+				<Button Grid.Column="3" Content="Сохранить и отправить" Command="{Binding OnClickSaveContract}"/>
+			</Grid>
+			<ListBox
+				Grid.Row="1"
+				 SelectedItem="{Binding SelectedBuildingService}"
+				 Items="{Binding BuildingServicesContract}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding BuildingService.Name}"/>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+	</Grid>
+</UserControl>

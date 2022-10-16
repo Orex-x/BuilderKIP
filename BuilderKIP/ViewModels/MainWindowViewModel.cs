@@ -1,4 +1,6 @@
+using Avalonia.Controls;
 using BuilderKIP.Models;
+using BuilderKIP.Views;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,8 @@ namespace BuilderKIP.ViewModels
         public void GoToRegistartion();
         public void GoToAuthorization();
         public void GoBack();
-        public void GoToHome();
+        public void GoToHomeEmployee();
+        public void GoToHomeClient(Client client);
     }
 
     [DataContract]
@@ -55,9 +58,14 @@ namespace BuilderKIP.ViewModels
             Router.Navigate.Execute(new AuthorizationUserControlViewModel(this));
         }
 
-        public void GoToHome()
+        public void GoToHomeClient(Client client)
         {
-            Router.Navigate.Execute(new ClientHomeUserControlViewModel(this));
+            Router.Navigate.Execute(new ClientHomeUserControlViewModel(client, this));
+        }
+        
+        public void GoToHomeEmployee()
+        {
+            Router.Navigate.Execute(new EmployeeHomeUserControlViewModel(this));
         }
     }
 }

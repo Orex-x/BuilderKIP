@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -94,7 +95,6 @@ namespace BuilderKIP.API
                 string uri = GenerateURI<T>(CRUD.get);
                 string json = sendRequest("", uri, Method.POST);
                 return JsonConvert.DeserializeObject<List<T>>(json);
-
             }
             catch(Exception ex)
             {
@@ -103,16 +103,38 @@ namespace BuilderKIP.API
             return null;
         }
 
+        public static int Create<T>(T obj)
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(obj, new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc
+                });
+
+                string uri = GenerateURI<T>(CRUD.create);
+                string jsonRequest = sendRequest(json, uri, Method.POST);
+
+                dynamic jsonObj = JsonConvert.DeserializeObject(jsonRequest);
+                return Convert.ToInt32(jsonObj["record"]["Id"]);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return 0;
+        }
+
         public static bool Registration(User user)
         {
             try
             {
                 string json = JsonConvert.SerializeObject(user);
                 string uri = GenerateURI<User>(CRUD.create);
-                var jsonAnswer = sendRequest(json, uri, Method.POST);
+                var jsonRequest = sendRequest(json, uri, Method.POST);
                 //создание клиента
 
-                dynamic jsonObj = JsonConvert.DeserializeObject(jsonAnswer);
+                dynamic jsonObj = JsonConvert.DeserializeObject(jsonRequest);
                 var newId = jsonObj["record"]["Id"];
 
                 var client = new Models.Client

@@ -95,13 +95,12 @@ namespace BuilderKIP.ViewModels
                 user.Password = hasher.HashPassword(user, Password);
 
 
-
                 bool ok = API.Client.Registration(user);
                 if (ok)
                 {
                     if (container != null)
                     {
-                        container.GoToHome();
+                        container.GoToAuthorization();
                     }
                 }
             }, checkPass);

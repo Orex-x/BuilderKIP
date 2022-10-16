@@ -1,4 +1,7 @@
-﻿using ReactiveUI;
+﻿using Avalonia;
+using Avalonia.Controls;
+using BuilderKIP.Models;
+using ReactiveUI;
 using Splat;
 using System;
 using System.Collections.Generic;
@@ -18,11 +21,16 @@ namespace BuilderKIP.ViewModels
 
         public IWindowContainer Container { get; private set; }
 
+        public ContractsPageViewModel ClientContractsPageViewModel { get; }
+        public ClientNewContractPageViewModel ClientNewContractPageViewModel { get; }
 
-        public ClientHomeUserControlViewModel(IWindowContainer container, IScreen screen = null)
+
+        public ClientHomeUserControlViewModel(Client client, IWindowContainer container, IScreen screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
             Container = container;
+            ClientContractsPageViewModel = new ContractsPageViewModel();
+            ClientNewContractPageViewModel = new ClientNewContractPageViewModel(client);
         }
 
     }
