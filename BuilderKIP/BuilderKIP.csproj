@@ -11,6 +11,9 @@
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
     <None Remove=".gitignore" />
+    <None Remove="Assets\Group.png" />
+    <None Remove="Assets\logo.jpg" />
+    <None Remove="Assets\log_page.png" />
   </ItemGroup>
   <ItemGroup>
     <!--This helps with theme dll-s trimming.
@@ -28,5 +31,16 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.3.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaResource Update="Assets\Group.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Update="Assets\logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Update="Assets\log_page.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AvaloniaResource>
   </ItemGroup>
 </Project>
