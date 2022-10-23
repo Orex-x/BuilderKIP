@@ -84,7 +84,27 @@ namespace BuilderKIP.ViewModels
                     if (Container != null)
                     {
                         if(client != null) Container.GoToHomeClient(client);
-                        if(employee != null) Container.GoToHomeEmployee();
+                        if (employee != null)
+                        {
+                            switch (employee.Role)
+                            {
+                                case Role.Supply:
+
+                                    break;
+
+                                case Role.Contractual:
+
+                                    break;
+                                
+                                case Role.Production:
+
+                                    break;
+                                
+                                case Role.Technical:
+                                    Container.GoToHomeTechnicalEmployee(employee);
+                                    break;
+                            }
+                        }
                     }
                 }
                 else

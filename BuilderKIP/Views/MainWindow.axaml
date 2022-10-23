@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="BuilderKIP.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-			xmlns:reactiveUi="http://reactiveui.net"
+		xmlns:reactiveUi="http://reactiveui.net"
         Title="BuilderKIP">
 
     <Design.DataContext>

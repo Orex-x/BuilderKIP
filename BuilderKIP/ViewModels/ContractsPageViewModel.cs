@@ -1,11 +1,7 @@
 ﻿using BuilderKIP.Models;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuilderKIP.ViewModels
 {
@@ -20,28 +16,10 @@ namespace BuilderKIP.ViewModels
         }
 
 
-        public ContractsPageViewModel()
+        public ContractsPageViewModel(Client client)
         {
-            Contracts.Add(new Contract
-            {
-                DateTimeNew = DateTime.Now,
-                Number = "Договор №123fg-a312"
-            });
-            Contracts.Add(new Contract
-            {
-                DateTimeNew = DateTime.Now,
-                Number = "Договор №13298dk-lkadf2"
-            });
-            Contracts.Add(new Contract
-            {
-                DateTimeNew = DateTime.Now,
-                Number = "Договор №fad9876-987asdf"
-            });
-            Contracts.Add(new Contract
-            {
-                DateTimeNew = DateTime.Now,
-                Number = "Договор №bd-0-adfc546"
-            });
+            Contracts = new(API.Client.Get<Contract>().Where(x => x.Client.Id == client.Id));
+
         }
     }
 }

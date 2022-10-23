@@ -5,26 +5,12 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BuilderKIP.Views.ClientContractsPage">
 	<Grid>
-		<ListBox Margin="10,10,10,10"
-				 SelectedItem="{Binding SelectedContract}"
-				 Items="{Binding Contracts}">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Grid>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="30"/>
-							<RowDefinition/>
-						</Grid.RowDefinitions>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="200"/>
-								<ColumnDefinition/>
-							</Grid.ColumnDefinitions>
-							<TextBlock Text="{Binding Number}"/>
-						</Grid>
-					</Grid>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+		<DataGrid Name="MyDataGrid" IsReadOnly="True" Items="{Binding Contracts}" AutoGenerateColumns="False" >
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Номер договора"  Binding="{Binding Number}"/>
+				<DataGridTextColumn Header="Дата" Width="150" Binding="{Binding DateTimeNew}" />
+				<DataGridTextColumn Header="Статус" Binding="{Binding ContractStatus}" />
+			</DataGrid.Columns>
+		</DataGrid>
 	</Grid>
 </UserControl>

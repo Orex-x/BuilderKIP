@@ -15,8 +15,6 @@ namespace BuilderKIP.ViewModels
     [DataContract]
     public class RegistrationUserControlViewModel : ReactiveObject, IRoutableViewModel
     {
-
-
         public string? UrlPathSegment => "/registration";
 
         public IScreen HostScreen { get; }

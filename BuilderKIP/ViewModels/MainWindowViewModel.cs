@@ -1,12 +1,7 @@
-using Avalonia.Controls;
 using BuilderKIP.Models;
-using BuilderKIP.Views;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace BuilderKIP.ViewModels
 {
@@ -15,7 +10,7 @@ namespace BuilderKIP.ViewModels
         public void GoToRegistartion();
         public void GoToAuthorization();
         public void GoBack();
-        public void GoToHomeEmployee();
+        public void GoToHomeTechnicalEmployee(Employee employee);
         public void GoToHomeClient(Client client);
     }
 
@@ -63,9 +58,9 @@ namespace BuilderKIP.ViewModels
             Router.Navigate.Execute(new ClientHomeUserControlViewModel(client, this));
         }
         
-        public void GoToHomeEmployee()
+        public void GoToHomeTechnicalEmployee(Employee employee)
         {
-            Router.Navigate.Execute(new EmployeeHomeUserControlViewModel(this));
+            Router.Navigate.Execute(new TechnicalEmployeeHomeUserControlViewModel(employee, this));
         }
     }
 }

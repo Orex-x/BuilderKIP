@@ -34,8 +34,6 @@ namespace BuilderKIP.ViewModels
         }
 
 
-
-
         public Interaction<BuildingServiceStoreWindowViewModel, BuildingService?> ShowDialog { get; }
         #endregion
 
@@ -53,14 +51,15 @@ namespace BuilderKIP.ViewModels
                 var store = new BuildingServiceStoreWindowViewModel();
 
                 var result = await ShowDialog.Handle(store);
-
-                //чтобы для entity обьект был уникальным
-                BuildingServicesContract.Add(new BuildingServiceContract()
+                if(result != null)
                 {
-                    BuildingServiceId = result.Id,
-                    BuildingService = result
-                });
-
+                    //чтобы для entity обьект был уникальным
+                    BuildingServicesContract.Add(new BuildingServiceContract()
+                    {
+                        BuildingServiceId = result.Id,
+                        BuildingService = result
+                    });
+                }
             });
 
             OnClickDeleteBuildingService = ReactiveCommand.Create(() =>
@@ -71,12 +70,14 @@ namespace BuilderKIP.ViewModels
 
             OnClickSaveContract = ReactiveCommand.Create(() =>
             {
-               // var list = BuildingServices = BuildingServicesContract,
+
+                var rnd = new Random();
+                string number = "Договор №" + rnd.Next(1000, 9999).ToString() + "-" + rnd.Next(1000, 9999).ToString();
                 var contact = new Contract
                 {
                     Address = Address,
                     ClientId = client.Id,
-                    Number = "123",
+                    Number = number,
                     ContractStatus = ContractStatus.NEW,
                     DeadLine = ((DateTimeOffset)Deadline).DateTime
                 };
@@ -88,38 +89,10 @@ namespace BuilderKIP.ViewModels
                     item.ContractId = ContractId;
                     API.Client.Create(item);
                 }
+                Address = string.Empty;
+                Deadline = null;
+                BuildingServicesContract.Clear();
             });
-        }
-
-
-        //хз, хотел сделать что то типо чтобы обьекты 
-        public void Clean<T>(T obj)
-        {
-            var fields = typeof(T).GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-          
-            foreach (var fld in fields)
-            {
-                var type = fld.FieldType.Name;
-                var name = getName(fld.Name);
-                object value = fld.GetValue(obj);
-                
-            }
-        }
-
-        public static string getName(string typeName)
-        {
-            string name = "";
-
-            for (int i = 0; i < typeName.Length; i++)
-            {
-                if (typeName[i] == '>')
-                    return name;
-
-                if (typeName[i] != '<')
-                    name += typeName[i];
-
-            }
-            return name;
         }
     }
 }

@@ -28,27 +28,7 @@ namespace BuilderKIP.ViewModels
      
         public BuildingServiceStoreWindowViewModel()
         {
-
-            var list = API.Client.Get<BuildingService>();
-
-            BuildingServices = new(list);
-
-          /*  BuildingServices.Add(new BuildingService{
-                Name = "Построить дом",
-                Price = 100000,
-                Description = "Строительство котеджа",
-                BuildPhases = new List<BuildPhase>
-                {
-                    new BuildPhase(){Name = "Заливка фундамента"},
-                    new BuildPhase(){Name = "Возведение каркаса"},
-                    new BuildPhase(){Name = "Постойка крыши"},
-                    new BuildPhase(){Name = "Утепление"},
-                    new BuildPhase(){Name = "Внешняя отделка"},
-                }
-            });
-            BuildingServices.Add(new BuildingService{Name = "Посторить баню"});
-            BuildingServices.Add(new BuildingService{Name = "Построить сарай"});*/
-
+            BuildingServices = new(API.Client.Get<BuildingService>());
 
             SaveCommand = ReactiveCommand.CreateFromTask(async () =>
             {

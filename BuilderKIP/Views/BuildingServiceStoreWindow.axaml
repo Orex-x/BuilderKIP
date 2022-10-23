@@ -17,7 +17,36 @@
 			 Items="{Binding BuildingServices}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<TextBlock Text="{Binding Name}"/>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition/>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="50"/>
+						</Grid.ColumnDefinitions>
+
+						<TextBlock
+							Grid.Column="0"
+							Margin="10,0,0,0"
+							HorizontalAlignment="Left"
+							Text="{Binding Name}"/>
+
+						<TextBlock
+							Grid.Column="1"
+							Margin="10,0,10,0"
+							Text="{Binding Description}"/>
+
+						<TextBlock
+							Grid.Column="2"
+							HorizontalAlignment="Right"
+							Margin="0,0,5,0"
+							Text="{Binding Price}"/>
+
+						<TextBlock
+							Grid.Column="3"
+							Margin="0,0,5,0"
+							Text="₽"/>
+					</Grid>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>

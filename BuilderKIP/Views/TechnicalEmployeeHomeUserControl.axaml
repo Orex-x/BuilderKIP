@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="BuilderKIP.Views.TechnicalEmployeeHomeUserControl">
+	<Grid>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="60"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Button Content="Открыть" Margin="10,0,0,0" Command="{Binding ClickOpen}"/>
+			<DataGrid
+				Grid.Row="1"
+				Name="MyDataGrid"
+				SelectedItem="{Binding SelectedContract}"
+				IsReadOnly="True"
+				Items="{Binding Contracts}"
+				AutoGenerateColumns="False" >
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Номер договора"  Binding="{Binding Number}"/>
+					<DataGridTextColumn Header="Дата" Width="150" Binding="{Binding DateTimeNew}" />
+					<DataGridTextColumn Header="Статус" Binding="{Binding ContractStatus}" />
+				</DataGrid.Columns>
+			</DataGrid>
+		</Grid>
+	</Grid>
+</UserControl>

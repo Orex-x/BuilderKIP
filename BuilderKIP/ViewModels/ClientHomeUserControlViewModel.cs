@@ -29,7 +29,7 @@ namespace BuilderKIP.ViewModels
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
             Container = container;
-            ClientContractsPageViewModel = new ContractsPageViewModel();
+            ClientContractsPageViewModel = new ContractsPageViewModel(client);
             ClientNewContractPageViewModel = new ClientNewContractPageViewModel(client);
         }
 
