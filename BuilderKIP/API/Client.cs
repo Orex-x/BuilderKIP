@@ -74,9 +74,14 @@ namespace BuilderKIP.API
 
         public static User Authorization(string login, string password)
         {
-            string uri = GenerateURI<User>(CRUD.get);
-            string json = sendRequest("", uri, Method.POST);
-            var listObjs = JsonConvert.DeserializeObject<List<User>>(json);
+            var listObjs = Get<User>();
+            var findUser = listObjs.FirstOrDefault(x => x.Login == login && x.Password == password);
+            if (findUser != null)
+            {
+                return findUser;
+            }
+
+            /*var listObjs = Get<User>();
             var findUser = listObjs.FirstOrDefault(x => x.Login == login);
             if (findUser != null)
             {
@@ -84,7 +89,7 @@ namespace BuilderKIP.API
                 var s = hasher.VerifyHashedPassword(findUser, findUser.Password, password);
                 if (s == PasswordVerificationResult.Success) return findUser;
             }
-            
+*/
             return null;
         }
 
@@ -129,22 +134,13 @@ namespace BuilderKIP.API
         {
             try
             {
-                string json = JsonConvert.SerializeObject(user);
-                string uri = GenerateURI<User>(CRUD.create);
-                var jsonRequest = sendRequest(json, uri, Method.POST);
-                //создание клиента
-
-                dynamic jsonObj = JsonConvert.DeserializeObject(jsonRequest);
-                var newId = jsonObj["record"]["Id"];
-
+                var newId = Create(user);
                 var client = new Models.Client
                 {
                     UserId = Convert.ToInt32(newId),
                     Balance = 0
                 };
-                json = JsonConvert.SerializeObject(client);
-                uri = GenerateURI<Client>(CRUD.create);
-                sendRequest(json, uri, Method.POST);
+                Create(client);
                 return true;
             }
             catch(Exception ex)

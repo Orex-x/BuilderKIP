@@ -86,11 +86,12 @@ namespace BuilderKIP.ViewModels
                     Login = Login,
                     FirstName = Name,
                     LastName = Lastname,
-                    MiddleName = Surname
+                    MiddleName = Surname,
+                    Password = Password
                 };
-
+/*
                 var hasher = new PasswordHasher<User>();
-                user.Password = hasher.HashPassword(user, Password);
+                user.Password = hasher.HashPassword(user, Password);*/
 
 
                 bool ok = API.Client.Registration(user);

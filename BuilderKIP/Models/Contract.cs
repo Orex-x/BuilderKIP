@@ -28,13 +28,11 @@ public class Contract
 
     public ContractStatus ContractStatus { get; set; }
 
-
     public DateTime? DateTimeNew { get; set; }
     public DateTime? DateTimeAccept { get; set; }
     public DateTime? DateTimeCompleted { get; set; }
-    
-    public virtual ICollection<BuildingServiceContract> BuildingServices { get; set; } 
 
+    public virtual BuildingServiceContract BuildingService { get; set; } = new();
     
     public int? ReceiptId { get; set; } = null;
     public virtual Receipt? Receipt { get; set; }

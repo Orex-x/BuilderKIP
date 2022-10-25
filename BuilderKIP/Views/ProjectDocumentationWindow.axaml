@@ -19,8 +19,10 @@
 		<Grid IsVisible="{Binding !RouterVisible}">
 			<Button
 				HorizontalAlignment="Right"
+				VerticalAlignment="Bottom"
+				Margin="10"
 				Command="{Binding SaveCommand}"
-				Content="Save"/>
+				Content="Сохранить"/>
 		</Grid>
 	</Grid>
 </Window>

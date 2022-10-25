@@ -3,21 +3,115 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:BuilderKIP.Models;assembly=BuilderKIP"
              x:Class="BuilderKIP.Views.EstimateDocumentationUserControl">
 
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="50"/>
 			<RowDefinition/>
 			<RowDefinition Height="60"/>
 		</Grid.RowDefinitions>
 
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="90"/>
+			</Grid.ColumnDefinitions>
+
+			<TextBlock
+				Margin="10"
+				FontSize="22"
+				FontFamily="Arial"
+				Text="Составление сметы"/>
+			
+			<Button 
+				Grid.Column="1"
+				Command="{Binding OnClickAddEstimateViewModel}"
+				Content="Добавить"/>
+		</Grid>
+
+
 		<Grid Grid.Row="1">
+			
+			
+			<ListBox Items="{Binding EstimateViewModels}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition Width="50"/>
+								<ColumnDefinition Width="50"/>
+								<ColumnDefinition Width="50"/>
+							</Grid.ColumnDefinitions>
+
+							<ComboBox 
+								Items="{x:Static vm:Boot.Materials}" 
+								HorizontalAlignment="Stretch"
+								Margin="5,0,5,0"
+								SelectedItem="{Binding SelectedMaterial}">
+								<ComboBox.ItemTemplate>
+									<DataTemplate>
+										<Grid>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition/>
+												<ColumnDefinition Width="150"/>
+											</Grid.ColumnDefinitions>
+
+											<TextBlock Text="{Binding Name}"/>
+											<TextBlock Grid.Column="1" Text="{Binding Price}"/>
+										</Grid>
+									</DataTemplate>
+								</ComboBox.ItemTemplate>
+							</ComboBox>
+							
+							<Button 
+								Grid.Column="1"
+								Content="-" 
+								VerticalAlignment="Center"
+								HorizontalAlignment="Center"
+								Command="{Binding OnClickDecrement}"/>
+
+							<TextBlock
+								Grid.Column="2"
+								VerticalAlignment="Center"
+								HorizontalAlignment="Center"
+								Text="{Binding Count}"/>
+							
+							<Button
+								Grid.Column="3"
+								VerticalAlignment="Center"
+								HorizontalAlignment="Center"
+								Content="+"
+								Command="{Binding OnClickIncrement}"/>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Grid>
+
+
+
+		<Grid Grid.Row="5">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
-				<Button Content="Далее" Grid.Column="1" Margin="0,0,10,0" HorizontalAlignment="Right" Command="{Binding OnClickNext}"/>
+				
+				<TextBlock
+					Text="Итого: $123002.00" 
+					Margin="20"
+					FontSize="20"
+					FontFamily="Arial"/>
+				
+				<Button
+					Content="Далее"
+					Grid.Column="1"
+					Margin="0,0,10,0"
+					HorizontalAlignment="Right"
+					Command="{Binding OnClickNext}"/>
 			</Grid>
 		</Grid>
 	</Grid>

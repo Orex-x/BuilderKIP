@@ -89,6 +89,7 @@ namespace BuilderKIP.ViewModels
                     item.ContractId = ContractId;
                     API.Client.Create(item);
                 }
+
                 Address = string.Empty;
                 Deadline = null;
                 BuildingServicesContract.Clear();

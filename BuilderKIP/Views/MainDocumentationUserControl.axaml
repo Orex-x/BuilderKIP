@@ -5,19 +5,170 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BuilderKIP.Views.MainDocumentationUserControl">
 
+	<UserControl.Resources>
+		<ImageBrush x:Key="ImgInformation" Source="/Assets/information.ico" Stretch="Uniform" RenderOptions.BitmapInterpolationMode="HighQuality"/>
+	</UserControl.Resources>
+
 	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition/>
+			<RowDefinition/>
 			<RowDefinition/>
 			<RowDefinition Height="60"/>
 		</Grid.RowDefinitions>
 		
+		<TextBlock 
+			Margin="10"
+			FontSize="22"
+			FontFamily="Arial"
+			Text="Инженерно-геодезические изыскания"/>
+
 		<Grid Grid.Row="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			
+			<Grid Grid.Row="0" Margin="20,0,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="30"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="40"/>
+				</Grid.ColumnDefinitions>
+				<Button 
+					Height="20"
+					Width="20"
+					Command="{Binding InformationTypeRelief}"
+					Background="{DynamicResource ImgInformation}"/>
+				<TextBlock
+					Text="Съемка рельефа. Укажите тип рельефа"
+					VerticalAlignment="Center"
+					Grid.Column="1"/>
+				
+				<Ellipse
+					Grid.Column="2"
+					Fill="{Binding EllipseTypeRelief}"
+					Margin="0,0,20,0"
+					Height="20"
+					Width="20"/>
+			</Grid>
+
+			<ComboBox
+				Grid.Row="1"
+				Margin="20,0,20,0"
+				Items="{Binding TypeReliefs}"
+				SelectedItem="{Binding SelectedTypeRelief}"
+				HorizontalAlignment="Stretch">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Name}"/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</Grid>
+
+
+		<Grid Grid.Row="2">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0" Margin="20,0,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="30"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="40"/>
+				</Grid.ColumnDefinitions>
+				<Button
+					Height="20"
+					Width="20"
+					Command="{Binding InformationTypeGround}"
+					Background="{DynamicResource ImgInformation}"/>
+				<TextBlock
+					Text="Инженерно-геологические изыскания. Укажите тип грунта"
+					VerticalAlignment="Center"
+					Grid.Column="1"/>
+
+				<Ellipse
+					Grid.Column="2"
+					Fill="{Binding EllipseTypeGround}"
+					Margin="0,0,20,0"
+					Height="20"
+					Width="20"/>
+			</Grid>
+
+			<ComboBox
+				Grid.Row="1"
+				Margin="20,0,20,0"
+				Items="{Binding TypeGrounds}"
+				SelectedItem="{Binding SelectedTypeGround}"
+				HorizontalAlignment="Stretch">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Name}"/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</Grid>
+		<Grid Grid.Row="3">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="30"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0" Margin="20,0,0,0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="30"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="40"/>
+				</Grid.ColumnDefinitions>
+				<Button
+					Height="20"
+					Width="20"
+					Command="{Binding InformationTypeClimaticCondition}"
+					Background="{DynamicResource ImgInformation}"/>
+				<TextBlock
+					Text="Инженерно-гидрометеорологические изыскания. Укажите тип климатического условия"
+					VerticalAlignment="Center"
+					Grid.Column="1"/>
+
+				<Ellipse
+					Grid.Column="2"
+					Fill="{Binding EllipseTypeClimaticCondition}"
+					Margin="0,0,20,0"
+					Height="20"
+					Width="20"/>
+			</Grid>
+
+			<ComboBox
+				Grid.Row="1"
+				Margin="20,0,20,0"
+				Items="{Binding TypeClimaticConditions}"
+				SelectedItem="{Binding SelectedTypeClimaticCondition}"
+				HorizontalAlignment="Stretch">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{Binding Name}"/>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</Grid>
+
+
+		<Grid Grid.Row="5">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition/>
 					<ColumnDefinition/>
 				</Grid.ColumnDefinitions>
-				<Button Content="Далее" Grid.Column="1" Margin="0,0,10,0" HorizontalAlignment="Right" Command="{Binding OnClickNext}"/>
+				<Button 
+					Content="Далее" 
+					Grid.Column="1" 
+					Margin="0,0,10,0" 
+					HorizontalAlignment="Right" 
+					Command="{Binding OnClickNext}"/>
 			</Grid>
 		</Grid>
 	</Grid>

@@ -19,8 +19,31 @@ namespace BuilderKIP.ViewModels
     [DataContract]
     public class ProjectDocumentationWindowViewModel : ReactiveObject, IScreen, IWindowContainerProjectDocumentation
     {
+        #region IWindowContainerProjectDocumentation
+
+        public void GoToEstimate(Contract contract)
+        {
+            Router.Navigate.Execute(new EstimateDocumentationUserControlViewModel(contract, this));
+        }
+
+        public void GoToStart(Contract contract)
+        {
+            Router.Navigate.Execute(new MainDocumentationUserControlViewModel(contract, this));
+        }
+
+        public void Save(Contract contract)
+        {
+            RouterVisible = false;
+            Contract = contract;
+        }
+        #endregion
+
 
         #region Fields
+        
+        
+        
+        
         private RoutingState _router = new RoutingState();
         [DataMember]
         public RoutingState Router
@@ -41,24 +64,7 @@ namespace BuilderKIP.ViewModels
         }
         #endregion
 
-        #region IWindowContainerProjectDocumentation
-
-        public void GoToEstimate(Contract contract)
-        {
-            Router.Navigate.Execute(new EstimateDocumentationUserControlViewModel(contract, this));
-        }
-
-        public void GoToStart(Contract contract)
-        {
-            Router.Navigate.Execute(new MainDocumentationUserControlViewModel(contract, this));
-        }
-
-        public void Save(Contract contract)
-        {
-            RouterVisible = false;
-            Contract = contract;
-        }
-        #endregion
+       
 
 
         public ProjectDocumentationWindowViewModel(Contract contract)
