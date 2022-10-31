@@ -130,6 +130,28 @@ namespace BuilderKIP.API
             return 0;
         }
 
+        public static int Update<T>(T obj)
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(obj, new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc
+                });
+
+                string uri = GenerateURI<T>(CRUD.update);
+                string jsonRequest = sendRequest(json, uri, Method.POST);
+
+                dynamic jsonObj = JsonConvert.DeserializeObject(jsonRequest);
+                return Convert.ToInt32(jsonObj["record"]["Id"]);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return 0;
+        }
+
         public static bool Registration(User user)
         {
             try

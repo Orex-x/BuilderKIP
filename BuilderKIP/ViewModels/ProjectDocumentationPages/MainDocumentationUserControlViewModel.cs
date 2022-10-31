@@ -180,9 +180,14 @@ namespace BuilderKIP.ViewModels.ProjectDocumentationPages
 
             OnClickNext = ReactiveCommand.Create(() =>
             {
-                contract.BuildingService.TypeClimaticCondition = SelectedTypeClimaticCondition;
-                contract.BuildingService.TypeGround = SelectedTypeGround;
-                contract.BuildingService.TypeRelief = SelectedTypeRelief;
+                contract.BuildingServiceContract.TypeClimaticConditionId = SelectedTypeClimaticCondition.Id;
+                contract.BuildingServiceContract.TypeGroundId = SelectedTypeGround.Id;
+                contract.BuildingServiceContract.TypeReliefId = SelectedTypeRelief.Id;
+
+                contract.BuildingServiceContract.TypeClimaticCondition = SelectedTypeClimaticCondition;
+                contract.BuildingServiceContract.TypeGround = SelectedTypeGround;
+                contract.BuildingServiceContract.TypeRelief = SelectedTypeRelief;
+
                 if (Container != null)
                     Container.GoToEstimate(contract);
             }, checkNext);

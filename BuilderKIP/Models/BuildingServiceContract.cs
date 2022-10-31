@@ -7,10 +7,13 @@ public class BuildingServiceContract
     public int Id { get; set; }
     public int? Grade { get; set; }
 
+    public int? TypeClimaticConditionId { get; set; } = null;
     public TypeClimaticCondition? TypeClimaticCondition { get; set; }
 
+    public int? TypeGroundId { get; set; } = null;
     public TypeGround? TypeGround { get; set; }
 
+    public int? TypeReliefId { get; set; } = null;
     public TypeRelief? TypeRelief { get; set; }
 
 
@@ -22,5 +25,5 @@ public class BuildingServiceContract
 
     public int PriceEstimate { get; set; }
 
-    public virtual ICollection<Material> Materials { get; set; }
+    public virtual ICollection<BuildingServiceMaterial> Materials { get; set; } = new List<BuildingServiceMaterial>();
 }

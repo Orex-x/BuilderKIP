@@ -83,9 +83,10 @@ namespace BuilderKIP.ViewModels
                 };
 
                 int ContractId = API.Client.Create(contact);
+
                 foreach(var item in BuildingServicesContract)
                 {
-                    item!.BuildingService = null;
+                    item!.BuildingService = null; //это кароче чтобы не ругалось что BuldingServise нарушает ограничение уникального ключа Id
                     item.ContractId = ContractId;
                     API.Client.Create(item);
                 }

@@ -101,7 +101,7 @@
 				</Grid.ColumnDefinitions>
 				
 				<TextBlock
-					Text="Итого: $123002.00" 
+					Text="{Binding TextSum}" 
 					Margin="20"
 					FontSize="20"
 					FontFamily="Arial"/>

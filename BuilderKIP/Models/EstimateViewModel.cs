@@ -9,24 +9,33 @@ namespace BuilderKIP.Models
         public ICommand OnClickIncrement { get; private set; }
 
         public ICommand OnClickDecrement { get; private set; }
-
+        private IEstimateViewModel _i;
 
         private int _count;
         public int Count
         {
             get => _count;
-            set => this.RaiseAndSetIfChanged(ref _count, value);
+            set
+            {
+                _i.change();
+                this.RaiseAndSetIfChanged(ref _count, value);
+            }
         }
 
         private Material _selectedMaterial;
         public Material SelectedMaterial
         {
             get => _selectedMaterial;
-            set => this.RaiseAndSetIfChanged(ref _selectedMaterial, value);
+            set
+            {
+                _i.change();
+                this.RaiseAndSetIfChanged(ref _selectedMaterial, value);
+            }
         }
 
-        public EstimateViewModel()
+        public EstimateViewModel(IEstimateViewModel i)
         {
+            _i = i;
             OnClickIncrement = ReactiveCommand.Create(() =>
             {
                 Count++;
@@ -34,7 +43,7 @@ namespace BuilderKIP.Models
 
             OnClickDecrement = ReactiveCommand.Create(() =>
             {
-                if(Count > 1)
+                if (Count > 1)
                     Count--;
             });
         }

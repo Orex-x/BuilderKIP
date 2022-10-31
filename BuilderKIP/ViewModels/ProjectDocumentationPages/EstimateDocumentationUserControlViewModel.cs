@@ -1,4 +1,5 @@
-﻿using BuilderKIP.Models;
+﻿using Avalonia.Threading;
+using BuilderKIP.Models;
 using ReactiveUI;
 using Splat;
 using System;
@@ -13,7 +14,7 @@ using System.Windows.Input;
 namespace BuilderKIP.ViewModels.ProjectDocumentationPages
 {
     [DataContract]
-    public class EstimateDocumentationUserControlViewModel : ReactiveObject, IRoutableViewModel
+    public class EstimateDocumentationUserControlViewModel : ReactiveObject, IRoutableViewModel, IEstimateViewModel
     {
 
         #region IRoutableViewModel
@@ -25,14 +26,12 @@ namespace BuilderKIP.ViewModels.ProjectDocumentationPages
 
         #endregion
 
-
-
         #region ICommand
         public ICommand OnClickNext { get; private set; }
         public ICommand OnClickAddEstimateViewModel { get; private set; }
         #endregion
 
-
+        #region Fields
         private ObservableCollection<EstimateViewModel> _estimateViewModels = new ObservableCollection<EstimateViewModel>();
 
         public ObservableCollection<EstimateViewModel> EstimateViewModels
@@ -41,17 +40,30 @@ namespace BuilderKIP.ViewModels.ProjectDocumentationPages
             set => this.RaiseAndSetIfChanged(ref _estimateViewModels, value);
         }
 
+        private int _sum;
+
+        private string _textSum;
+
+        public string TextSum
+        {
+            get => _textSum;
+            set => this.RaiseAndSetIfChanged(ref _textSum, value);
+        }
+        #endregion
+
+
 
         public EstimateDocumentationUserControlViewModel(Contract contract, IWindowContainerProjectDocumentation container, IScreen screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
             Container = container;
 
-           /* var checkNext = this.WhenAnyValue(
-                x => x.EstimateViewModels.Where(z => z.SelectedMaterial != null).ToArray().Length == x.EstimateViewModels.Count);
-*/
+            /* var checkNext = this.WhenAnyValue(
+                 x => x.EstimateViewModels.Where(z => z.SelectedMaterial != null).ToArray().Length == x.EstimateViewModels.Count);
+ */
 
-          
+            _sum = 0;
+            TextSum = $"Итог: ${_sum}.00";
             Boot.Materials = new(API.Client.Get<Material>());
 
             OnClickNext = ReactiveCommand.Create(() =>
@@ -61,13 +73,19 @@ namespace BuilderKIP.ViewModels.ProjectDocumentationPages
                 {
                     if(item.SelectedMaterial != null)
                     {
-                        var material = new Material()
+                        var bsm = new BuildingServiceMaterial
                         {
-                            Name = item.SelectedMaterial.Name,
-                            Price = item.SelectedMaterial.Price,
-                            BuildingServiceContractId = contract.Id
+                            MaterialId = item.SelectedMaterial.Id,
+                            BuildingServiceContractId = contract.Id,
+                            Material = item.SelectedMaterial,
+                            Amount = item.Count,
                         };
-                        API.Client.Create(material);
+                        if (contract.BuildingServiceContract.Materials == null) 
+                            contract.BuildingServiceContract.Materials = new List<BuildingServiceMaterial>();
+
+                        contract.BuildingServiceContract.Materials.Add(bsm);
+
+                        contract.BuildingServiceContract.PriceEstimate = _sum;
                     }
                 }
 
@@ -77,12 +95,26 @@ namespace BuilderKIP.ViewModels.ProjectDocumentationPages
 
             OnClickAddEstimateViewModel = ReactiveCommand.Create(() =>
             {
-                EstimateViewModels.Add(new EstimateViewModel()
+                EstimateViewModels.Add(new EstimateViewModel(this)
                 {
                     Count = 1
                 });
             });
 
+        }
+
+        public void change()
+        {
+            Dispatcher.UIThread.InvokeAsync( async () => {
+                int sum = 0;
+                foreach (var item in EstimateViewModels)
+                {
+                    if(item.SelectedMaterial != null)
+                        sum += item.Count * item.SelectedMaterial.Price;
+                }
+                _sum = sum;
+                TextSum = $"Итог: ${_sum}.00";
+            });
         }
     }
 }
