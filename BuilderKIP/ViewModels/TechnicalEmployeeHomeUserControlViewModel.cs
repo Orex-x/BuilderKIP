@@ -70,7 +70,22 @@ namespace BuilderKIP.ViewModels
                     var result = await ShowDialog.Handle(store);
                     if(result != null)
                     {
+                        foreach (var item in result.BuildingServiceContract.Materials)
+                        {
+                            item!.Material = null;
+                            item!.BuildingServiceContract = null;
+                            API.Client.Create(item);
+                        }
 
+                        result.BuildingServiceContract.TypeClimaticCondition = null;
+                        result.BuildingServiceContract.TypeGround = null;
+                        result.BuildingServiceContract.TypeRelief = null;
+                        result.BuildingServiceContract.Materials = null;
+                        result.BuildingServiceContract.ContractId = result.Id;
+
+
+                        API.Client.Update(result.BuildingServiceContract);
+                        API.Client.Update(result);
                     }
                 }
             });

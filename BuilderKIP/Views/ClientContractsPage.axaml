@@ -4,8 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="BuilderKIP.Views.ClientContractsPage">
-	<Grid>
-		<DataGrid Name="MyDataGrid" IsReadOnly="True" Items="{Binding Contracts}" AutoGenerateColumns="False" >
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		
+		<Button Command="{Binding OpenDetailsContract}" Content="Открыть"/>
+		
+		<DataGrid 
+			Grid.Row="1" 
+			Name="MyDataGrid"
+			SelectedItem="{Binding SelectedContract}" 
+			IsReadOnly="True"
+			Items="{Binding Contracts}" 
+			AutoGenerateColumns="False" >
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Номер договора"  Binding="{Binding Number}"/>
 				<DataGridTextColumn Header="Дата" Width="150" Binding="{Binding DateTimeNew}" />

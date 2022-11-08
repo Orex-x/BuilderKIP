@@ -49,7 +49,6 @@ namespace BuilderKIP.ViewModels
         }
         #endregion
 
-
         #region Fields
         
         
@@ -115,8 +114,6 @@ namespace BuilderKIP.ViewModels
         #endregion
 
 
-
-
         public ProjectDocumentationWindowViewModel(Contract contract)
         {
             RouterVisible = true;
@@ -124,25 +121,6 @@ namespace BuilderKIP.ViewModels
 
             SaveCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                if(Contract != null)
-                {
-                    foreach (var item in Contract.BuildingServiceContract.Materials)
-                    {
-                        item!.Material = null;
-                        item!.BuildingServiceContract = null;
-                        API.Client.Create(item);
-                    }
-
-                    Contract.BuildingServiceContract.TypeClimaticCondition = null;
-                    Contract.BuildingServiceContract.TypeGround = null;
-                    Contract.BuildingServiceContract.TypeRelief = null;
-                    Contract.BuildingServiceContract.Materials = null;
-                    Contract.BuildingServiceContract.ContractId = Contract.Id;
-
-
-                    API.Client.Update(Contract.BuildingServiceContract);
-                    //API.Client.Update(Contract);
-                }
                 return Contract;
             });
         }

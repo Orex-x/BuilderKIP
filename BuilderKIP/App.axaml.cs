@@ -28,6 +28,7 @@ namespace BuilderKIP
             Locator.CurrentMutable.Register<IViewFor<MainDocumentationUserControlViewModel>>(() => new MainDocumentationUserControl());
             Locator.CurrentMutable.Register<IViewFor<EstimateDocumentationUserControlViewModel>>(() => new EstimateDocumentationUserControl());
 
+
             // Получаем корневую модель представления и инициализируем контекст данных.
             new MainWindow { DataContext = Locator.Current.GetService<IScreen>() }.Show();
 

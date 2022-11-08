@@ -6,9 +6,12 @@ using Splat;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Contract = BuilderKIP.Models.Contract;
 
 namespace BuilderKIP.ViewModels
 {
@@ -24,7 +27,7 @@ namespace BuilderKIP.ViewModels
         public ContractsPageViewModel ClientContractsPageViewModel { get; }
         public ClientNewContractPageViewModel ClientNewContractPageViewModel { get; }
 
-
+       
         public ClientHomeUserControlViewModel(Client client, IWindowContainer container, IScreen screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
