@@ -6,6 +6,30 @@
 			 xmlns:views="clr-namespace:BuilderKIP.Views"
              x:Class="BuilderKIP.Views.ClientHomeUserControl">
 	<TabControl>
+		<TabItem Header="Личный кабинет" VerticalContentAlignment="Center">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="50"/>
+					<RowDefinition Height="30"/>
+				</Grid.RowDefinitions>
+			
+
+				<Grid Grid.Row="0">
+					<StackPanel  Orientation="Horizontal">
+						<TextBlock Text="Текущий баланс: " VerticalAlignment="Center"/>
+						<TextBlock Text="{Binding Client.Balance}"/>
+					</StackPanel>
+				</Grid>
+
+				<Grid Grid.Row="1">
+					<StackPanel  Orientation="Horizontal">
+						<TextBlock Text="Пополнить баланс" VerticalAlignment="Center"/>
+						<TextBox Text="{Binding TxtBalance}"/>
+						<Button Command="{Binding Deposit}" Content="Внести"/>
+					</StackPanel>
+				</Grid>
+			</Grid>
+		</TabItem>
 		<TabItem Header="Договоры" VerticalContentAlignment="Center">
 			<views:ClientContractsPage DataContext="{Binding ClientContractsPageViewModel}"/>
 		</TabItem>

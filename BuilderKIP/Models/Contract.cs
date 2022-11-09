@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace BuilderKIP.Models;
 
@@ -61,21 +62,40 @@ public class Contract
 
     public int GetProcces()
     {
-        return 10;
+        if(BuildingServiceContract.Stages != null)
+        {
+            int sum = BuildingServiceContract.Stages.Count;
+            int sumAccept = BuildingServiceContract.Stages.ToList().Where(x => x.Status == "Выполнен").ToList().Count;
+            return sumAccept * 100 / sum;
+        }
+        return 0;
     }
 
     public int GetSumMaterials()
     {
-        return 10;
+        if(BuildingServiceContract.Materials != null)
+        {
+            int sum = 0;
+            foreach(var item in BuildingServiceContract.Materials)
+            {
+                sum += item.Material.Price * item.Amount;
+            }
+            return sum;
+        }
+        return 0;
     }  
     
     public int GetSumServices()
     {
-        return 10;
+        if (BuildingServiceContract.BuildingService != null)
+        {
+            return BuildingServiceContract.BuildingService.Price;
+        }
+        return 0;
     }  
     
     public int GetSum()
     {
-        return 10;
+        return GetSumMaterials() + GetSumServices();
     }
 }

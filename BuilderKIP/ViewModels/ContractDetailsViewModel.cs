@@ -1,5 +1,6 @@
 ﻿using BuilderKIP.Models;
 using ReactiveUI;
+using System;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using System.Windows.Input;
@@ -45,8 +46,9 @@ namespace BuilderKIP.ViewModels
 
         
        public ICommand AcceptContract { get; set; }
+       public ICommand ToPay { get; set; }
 
-        public ContractDetailsViewModel(Contract contract)
+        public ContractDetailsViewModel(Contract contract, Client client)
         {
             if(contract.BuildingServiceContract.Materials != null)
             {
@@ -67,6 +69,18 @@ namespace BuilderKIP.ViewModels
                 if(contract.ContractStatus == ContractStatus.NOT_ACCEPT)
                 {
                     contract.ContractStatus = ContractStatus.ACCEPT;
+                    API.Client.Update(contract);
+                }
+            });
+
+            ToPay = ReactiveCommand.Create(() =>
+            {
+                int sum = contract.GetSum();
+                if(sum <= client.Balance)
+                {
+                    client.Balance = client.Balance - sum;
+                    API.Client.Update(client);
+                    contract.ContractStatus = ContractStatus.COMPLETED;
                     API.Client.Update(contract);
                 }
             });

@@ -39,7 +39,7 @@ namespace BuilderKIP.ViewModels
             {
                 if (SelectedContract != null)
                 {
-                    var store = new ContractDetailsViewModel(SelectedContract);
+                    var store = new ContractDetailsViewModel(SelectedContract, client);
                     var result = await ShowDialog.Handle(store);
                     if (result != null)
                     {

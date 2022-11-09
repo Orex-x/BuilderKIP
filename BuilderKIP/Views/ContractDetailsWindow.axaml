@@ -70,6 +70,15 @@
 								Margin="10,0,0,0"
 								Command="{Binding AcceptContract}"
 								Content="Принять"/>
+
+							<TextBlock
+								Margin="50,0,0,0"
+								Text="Оплатить проект"
+								VerticalAlignment="Center"/>
+							<Button
+								Margin="10,0,0,0"
+								Command="{Binding ToPay}"
+								Content="Оплатить"/>
 						</StackPanel>
 					</Grid>
 
