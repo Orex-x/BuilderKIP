@@ -88,8 +88,8 @@ namespace BuilderKIP.ViewModels
                         {
                             switch (employee.Role)
                             {
-                                case Role.Supply:
-
+                                case Role.Engineer:
+                                    Container.GoToHomeEngineerEmployee(employee);
                                     break;
 
                                 case Role.Contractual:

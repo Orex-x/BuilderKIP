@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using BuilderKIP.ViewModels;
+using BuilderKIP.ViewModels.Engineer;
 using BuilderKIP.ViewModels.ProjectDocumentationPages;
 using BuilderKIP.Views;
 using ReactiveUI;
@@ -27,6 +28,7 @@ namespace BuilderKIP
             Locator.CurrentMutable.Register<IViewFor<ProjectDocumentationWindowViewModel>>(() => new ProjectDocumentationWindow());
             Locator.CurrentMutable.Register<IViewFor<MainDocumentationUserControlViewModel>>(() => new MainDocumentationUserControl());
             Locator.CurrentMutable.Register<IViewFor<EstimateDocumentationUserControlViewModel>>(() => new EstimateDocumentationUserControl());
+            Locator.CurrentMutable.Register<IViewFor<EngineerEmployeeHomeUserControlViewModel>>(() => new EngineerEmployeeHomeUserControl());
 
 
             // Получаем корневую модель представления и инициализируем контекст данных.

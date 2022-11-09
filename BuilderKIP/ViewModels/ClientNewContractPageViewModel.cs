@@ -91,7 +91,7 @@ namespace BuilderKIP.ViewModels
                     API.Client.Create(item);
                 }
 
-                Address = string.Empty;
+                Address = null;
                 Deadline = null;
                 BuildingServicesContract.Clear();
             });

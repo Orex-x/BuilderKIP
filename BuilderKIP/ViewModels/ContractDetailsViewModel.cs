@@ -1,4 +1,5 @@
-﻿using BuilderKIP.Models;
+﻿using Avalonia.Controls.Shapes;
+using BuilderKIP.Models;
 using ReactiveUI;
 using Splat;
 using System;
@@ -35,6 +36,23 @@ namespace BuilderKIP.ViewModels
             set => this.RaiseAndSetIfChanged(ref _stagesViewModels, value);
         }
 
+        private ObservableCollection<string> _contractInfo = new ObservableCollection<string>();
+
+        public ObservableCollection<string> ContractInfo
+        {
+            get => _contractInfo;
+            set => this.RaiseAndSetIfChanged(ref _contractInfo, value);
+        }
+
+        private ObservableCollection<BuildingServiceMaterial> _materials = new ObservableCollection<BuildingServiceMaterial>();
+
+        public ObservableCollection<BuildingServiceMaterial> Materials
+        {
+            get => _materials;
+            set => this.RaiseAndSetIfChanged(ref _materials, value);
+        }
+
+
         public ContractDetailsViewModel(Contract contract)
         {
 
@@ -42,6 +60,7 @@ namespace BuilderKIP.ViewModels
             {
                 Name = "Этап 1",
                 ActionName = "Принять",
+                Status = "Статус",
                 Ellipse = "green"
             };
 
@@ -50,14 +69,51 @@ namespace BuilderKIP.ViewModels
                 svm.Ellipse = "red";
             });
 
+            var svm2 = new StagesViewModel()
+            {
+                Name = "Этап 2",
+                ActionName = "Принять",
+                Status = "Статус",
+                Ellipse = "green"
+            };
+
+            svm2.Action = ReactiveCommand.Create(() =>
+            {
+                svm2.Ellipse = "red";
+            });
+
+
+            var svm3 = new StagesViewModel()
+            {
+                Name = "Этап 2",
+                ActionName = "Принять",
+                Status = "Статус",
+                Ellipse = "green"
+            };
+
+            svm3.Action = ReactiveCommand.Create(() =>
+            {
+                svm3.Ellipse = "red";
+            });
+
             Stages.Add(svm);
+            Stages.Add(svm2);
+            Stages.Add(svm3);
+
+            if(contract.BuildingServiceContract.Materials != null)
+            {
+                foreach (var item in contract.BuildingServiceContract.Materials)
+                    Materials.Add(item);
+            }
+            
+            
+
+            ContractInfo = contract.GetContractInfo();
 
             SaveCommand = ReactiveCommand.CreateFromTask(async () =>
             {
                 return contract;
             });
         }
-
-      
     }
 }

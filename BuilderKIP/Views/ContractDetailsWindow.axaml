@@ -15,20 +15,7 @@
 					</Grid.ColumnDefinitions>
 
 					<Grid Grid.Row="0">
-						<ListBox Items="{Binding StringInfo}">
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<Grid>
-										<TextBlock
-											HorizontalAlignment="Stretch"
-											Margin="5,0,5,0"
-											FontFamily="Arial"
-											FontSize="18"
-											Text="{Binding Name}"/>
-									</Grid>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
+						<ListBox Items="{Binding ContractInfo}"/>
 					</Grid>
 
 					<Grid Grid.Column="1">
@@ -73,21 +60,34 @@
 							<Grid>
 								<StackPanel Orientation="Horizontal">
 									<Ellipse
+										Margin="20,0,0,0"
+										VerticalAlignment="Center"
 										Fill="{Binding Ellipse}"
 										Height="20"
 										Width="20"/>
 									<TextBlock
+										Margin="20,0,0,0"
+										VerticalAlignment="Center"
 										Text="{Binding Name}"
 										FontFamily="Arial"
 										FontSize="18"/>
+
 									<TextBlock
+										Margin="20,0,0,0"
+										VerticalAlignment="Center"
 										Text="{Binding Status}"
 										FontFamily="Arial"
-										FontSize="18"/>
+										FontSize="18"/> 
+									
 									<Button
+										Margin="20,0,0,0"
+										HorizontalAlignment="Right"
+										VerticalAlignment="Center"
 										Content="{Binding ActionName}"
 										Command="{Binding Action}"/>
 
+									
+									
 								</StackPanel>
 							</Grid>
 						</DataTemplate>

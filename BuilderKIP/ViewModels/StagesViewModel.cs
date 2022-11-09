@@ -1,4 +1,5 @@
-﻿using BuilderKIP.Models;
+﻿
+using BuilderKIP.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace BuilderKIP.ViewModels
             get => _status;
             set
             {
-                this.RaiseAndSetIfChanged(ref _actionName, value);
+                this.RaiseAndSetIfChanged(ref _status, value);
             }
         }
          
@@ -57,7 +58,7 @@ namespace BuilderKIP.ViewModels
 
         public StagesViewModel()
         {
-
+           
         }
     }
 }

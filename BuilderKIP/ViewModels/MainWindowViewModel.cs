@@ -1,4 +1,5 @@
 using BuilderKIP.Models;
+using BuilderKIP.ViewModels.Engineer;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
@@ -11,6 +12,7 @@ namespace BuilderKIP.ViewModels
         public void GoToAuthorization();
         public void GoBack();
         public void GoToHomeTechnicalEmployee(Employee employee);
+        public void GoToHomeEngineerEmployee(Employee employee);
         public void GoToHomeClient(Client client);
     }
 
@@ -61,6 +63,11 @@ namespace BuilderKIP.ViewModels
         public void GoToHomeTechnicalEmployee(Employee employee)
         {
             Router.Navigate.Execute(new TechnicalEmployeeHomeUserControlViewModel(employee, this));
+        }
+
+        public void GoToHomeEngineerEmployee(Employee employee)
+        {
+            Router.Navigate.Execute(new EngineerEmployeeHomeUserControlViewModel(employee, this));
         }
     }
 }
