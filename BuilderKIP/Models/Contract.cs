@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace BuilderKIP.Models;
@@ -7,6 +6,7 @@ namespace BuilderKIP.Models;
 public enum ContractStatus
 {
     NEW,
+    NOT_ACCEPT,
     ACCEPT,
     COMPLETED
 }

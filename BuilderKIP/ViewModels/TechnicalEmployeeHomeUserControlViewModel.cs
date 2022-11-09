@@ -67,25 +67,26 @@ namespace BuilderKIP.ViewModels
                 if(SelectedContract != null)
                 {
                     var store = new ProjectDocumentationWindowViewModel(SelectedContract);
-                    var result = await ShowDialog.Handle(store);
-                    if(result != null)
+                    var contract = await ShowDialog.Handle(store);
+                    if(contract != null)
                     {
-                        foreach (var item in result.BuildingServiceContract.Materials)
+                        foreach (var item in contract.BuildingServiceContract.Materials)
                         {
                             item!.Material = null;
                             item!.BuildingServiceContract = null;
                             API.Client.Create(item);
                         }
 
-                        result.BuildingServiceContract.TypeClimaticCondition = null;
-                        result.BuildingServiceContract.TypeGround = null;
-                        result.BuildingServiceContract.TypeRelief = null;
-                        result.BuildingServiceContract.Materials = null;
-                        result.BuildingServiceContract.ContractId = result.Id;
+                        contract.BuildingServiceContract.TypeClimaticCondition = null;
+                        contract.BuildingServiceContract.TypeGround = null;
+                        contract.BuildingServiceContract.TypeRelief = null;
+                        contract.BuildingServiceContract.Materials = null;
+                        contract.BuildingServiceContract.ContractId = contract.Id;
 
+                        contract.ContractStatus = ContractStatus.NOT_ACCEPT;
 
-                        API.Client.Update(result.BuildingServiceContract);
-                        API.Client.Update(result);
+                        API.Client.Update(contract.BuildingServiceContract);
+                        API.Client.Update(contract);
                     }
                 }
             });
