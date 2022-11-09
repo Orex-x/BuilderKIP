@@ -5,11 +5,13 @@ using Splat;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BuilderKIP.ViewModels
 {
@@ -25,8 +27,6 @@ namespace BuilderKIP.ViewModels
             get => _router;
             set => this.RaiseAndSetIfChanged(ref _router, value);
         }
-
-        public ReactiveCommand<Unit, Contract?> SaveCommand { get; }
 
         private ObservableCollection<StagesViewModel> _stagesViewModels = new ObservableCollection<StagesViewModel>();
 
@@ -52,68 +52,35 @@ namespace BuilderKIP.ViewModels
             set => this.RaiseAndSetIfChanged(ref _materials, value);
         }
 
+        
+       public ICommand AcceptContract { get; set; }
 
         public ContractDetailsViewModel(Contract contract)
         {
-
-            var svm = new StagesViewModel()
-            {
-                Name = "Этап 1",
-                ActionName = "Принять",
-                Status = "Статус",
-                Ellipse = "green"
-            };
-
-            svm.Action = ReactiveCommand.Create(() =>
-            {
-                svm.Ellipse = "red";
-            });
-
-            var svm2 = new StagesViewModel()
-            {
-                Name = "Этап 2",
-                ActionName = "Принять",
-                Status = "Статус",
-                Ellipse = "green"
-            };
-
-            svm2.Action = ReactiveCommand.Create(() =>
-            {
-                svm2.Ellipse = "red";
-            });
-
-
-            var svm3 = new StagesViewModel()
-            {
-                Name = "Этап 2",
-                ActionName = "Принять",
-                Status = "Статус",
-                Ellipse = "green"
-            };
-
-            svm3.Action = ReactiveCommand.Create(() =>
-            {
-                svm3.Ellipse = "red";
-            });
-
-            Stages.Add(svm);
-            Stages.Add(svm2);
-            Stages.Add(svm3);
-
             if(contract.BuildingServiceContract.Materials != null)
             {
                 foreach (var item in contract.BuildingServiceContract.Materials)
                     Materials.Add(item);
             }
-            
-            
+
+            if (contract.BuildingServiceContract.Stages != null)
+            {
+                foreach (var item in contract.BuildingServiceContract.Stages)
+                    Stages.Add(new StagesViewModel(item));
+            }
+
+
+
+            AcceptContract = ReactiveCommand.Create(() =>
+            {
+                if(contract.ContractStatus == ContractStatus.NOT_ACCEPT)
+                {
+                    contract.ContractStatus = ContractStatus.ACCEPT;
+                    API.Client.Update(contract);
+                }
+            });
 
             ContractInfo = contract.GetContractInfo();
-
-            SaveCommand = ReactiveCommand.CreateFromTask(async () =>
-            {
-                return contract;
-            });
         }
     }
 }

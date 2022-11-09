@@ -33,6 +33,7 @@ public class Contract
     public DateTime? DateTimeAccept { get; set; }
     public DateTime? DateTimeCompleted { get; set; }
 
+    public int BuildingServiceContractId { get; set; }
     public BuildingServiceContract BuildingServiceContract { get; set; }
     
     public int? ReceiptId { get; set; } = null;

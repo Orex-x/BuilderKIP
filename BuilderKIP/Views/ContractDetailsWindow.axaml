@@ -54,45 +54,62 @@
 				</Grid>
 			</TabItem>
 			<TabItem Header="Этапы" VerticalContentAlignment="Center">
-				<ListBox Items="{Binding Stages}">
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<Grid>
-								<StackPanel Orientation="Horizontal">
-									<Ellipse
-										Margin="20,0,0,0"
-										VerticalAlignment="Center"
-										Fill="{Binding Ellipse}"
-										Height="20"
-										Width="20"/>
-									<TextBlock
-										Margin="20,0,0,0"
-										VerticalAlignment="Center"
-										Text="{Binding Name}"
-										FontFamily="Arial"
-										FontSize="18"/>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="50"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
 
-									<TextBlock
-										Margin="20,0,0,0"
-										VerticalAlignment="Center"
-										Text="{Binding Status}"
-										FontFamily="Arial"
-										FontSize="18"/> 
-									
-									<Button
-										Margin="20,0,0,0"
-										HorizontalAlignment="Right"
-										VerticalAlignment="Center"
-										Content="{Binding ActionName}"
-										Command="{Binding Action}"/>
+					<Grid>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock
+								Margin="10,0,0,0"
+								Text="Принять проект" 
+								VerticalAlignment="Center"/>
+							<Button
+								Margin="10,0,0,0"
+								Command="{Binding AcceptContract}"
+								Content="Принять"/>
+						</StackPanel>
+					</Grid>
 
-									
-									
-								</StackPanel>
-							</Grid>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
+					<ListBox Grid.Row="1" Items="{Binding Stages}">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Grid>
+									<StackPanel Orientation="Horizontal">
+										<Ellipse
+											Margin="20,0,0,0"
+											VerticalAlignment="Center"
+											Fill="{Binding Stage.Ellipse}"
+											Height="20"
+											Width="20"/>
+										<TextBlock
+											Margin="20,0,0,0"
+											VerticalAlignment="Center"
+											Text="{Binding Stage.Name}"
+											FontFamily="Arial"
+											FontSize="18"/>
+
+										<TextBlock
+											Margin="20,0,0,0"
+											VerticalAlignment="Center"
+											Text="{Binding Stage.Status}"
+											FontFamily="Arial"
+											FontSize="18"/>
+
+										<Button
+											Margin="20,0,0,0"
+											HorizontalAlignment="Right"
+											VerticalAlignment="Center"
+											Content="{Binding Stage.ActionName}"
+											Command="{Binding Action}"/>
+									</StackPanel>
+								</Grid>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
 			</TabItem>
 		</TabControl>
 	</Grid>

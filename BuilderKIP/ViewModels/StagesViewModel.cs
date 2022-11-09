@@ -12,53 +12,30 @@ namespace BuilderKIP.ViewModels
 {
     public class StagesViewModel : ReactiveObject
     {
-        public ICommand Action { get; set; }
+        public ICommand Action { get; private set; }
 
+        private Stage _stage;
 
-        private string _name;
-        public string Name
+        public Stage Stage
         {
-            get => _name;
+            get => _stage;
             set
             {
-                this.RaiseAndSetIfChanged(ref _name, value);
+                this.RaiseAndSetIfChanged(ref _stage, value);
             }
         }
 
-        private string _actionName;
-        public string ActionName
-        {
-            get => _actionName;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _actionName, value);
-            }
-        } 
         
-        private string _status;
-        public string Status
+        public StagesViewModel(Stage stage)
         {
-            get => _status;
-            set
+            Stage = stage;
+            Action = ReactiveCommand.Create(() =>
             {
-                this.RaiseAndSetIfChanged(ref _status, value);
-            }
-        }
-         
-        
-        private string _ellipse;
-        public string Ellipse
-        {
-            get => _ellipse;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _ellipse, value);
-            }
-        }
+                Stage.Status = "Выполнен";
+                Stage.Ellipse = "green";
 
-        public StagesViewModel()
-        {
-           
+                API.Client.Update(Stage);
+            });
         }
     }
 }

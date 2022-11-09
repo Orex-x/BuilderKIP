@@ -26,4 +26,5 @@ public class BuildingServiceContract
     public int PriceEstimate { get; set; }
 
     public virtual ICollection<BuildingServiceMaterial> Materials { get; set; } = new List<BuildingServiceMaterial>();
+    public virtual ICollection<Stage> Stages { get; set; } = new List<Stage>();
 }

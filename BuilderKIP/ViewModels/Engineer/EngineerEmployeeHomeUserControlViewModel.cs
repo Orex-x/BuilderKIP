@@ -56,7 +56,7 @@ namespace BuilderKIP.ViewModels.Engineer
 
             ShowDialog = new();
 
-            Contracts = new(API.Client.Get<Contract>().Where(x => x.ContractStatus == ContractStatus.NOT_ACCEPT));
+            Contracts = new(API.Client.Get<Contract>().Where(x => x.ContractStatus == ContractStatus.ACCEPT));
 
             ClickOpen = ReactiveCommand.Create(async () =>
             {
@@ -66,11 +66,14 @@ namespace BuilderKIP.ViewModels.Engineer
                     var contract = await ShowDialog.Handle(store);
                     if (contract != null)
                     {
-                       
+                        foreach (var item in contract.BuildingServiceContract.Stages)
+                        {
+                            item!.BuildingServiceContract = null;
+                            API.Client.Create(item);
+                        }
                     }
                 }
             });
-
         }
     }
 }
