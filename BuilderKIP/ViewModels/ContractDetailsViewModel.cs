@@ -1,16 +1,7 @@
-﻿using Avalonia.Controls.Shapes;
-using BuilderKIP.Models;
+﻿using BuilderKIP.Models;
 using ReactiveUI;
-using Splat;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Reactive;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace BuilderKIP.ViewModels
@@ -28,12 +19,12 @@ namespace BuilderKIP.ViewModels
             set => this.RaiseAndSetIfChanged(ref _router, value);
         }
 
-        private ObservableCollection<StagesViewModel> _stagesViewModels = new ObservableCollection<StagesViewModel>();
+        private ObservableCollection<Stage> _stages = new ObservableCollection<Stage>();
 
-        public ObservableCollection<StagesViewModel> Stages
+        public ObservableCollection<Stage> Stages
         {
-            get => _stagesViewModels;
-            set => this.RaiseAndSetIfChanged(ref _stagesViewModels, value);
+            get => _stages;
+            set => this.RaiseAndSetIfChanged(ref _stages, value);
         }
 
         private ObservableCollection<string> _contractInfo = new ObservableCollection<string>();
@@ -66,7 +57,7 @@ namespace BuilderKIP.ViewModels
             if (contract.BuildingServiceContract.Stages != null)
             {
                 foreach (var item in contract.BuildingServiceContract.Stages)
-                    Stages.Add(new StagesViewModel(item));
+                    Stages.Add(item);
             }
 
 

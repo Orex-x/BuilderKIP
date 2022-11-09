@@ -38,14 +38,14 @@
 		</Grid>
 
 		<Grid Grid.Row="1">
-			<ListBox Items="{Binding StagesViewModels}">
+			<ListBox Items="{Binding Stages}">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<Grid>
 							<TextBox
 									Margin="20,0,0,0"
 									VerticalAlignment="Center"
-									Text="{Binding Stage.Name}"
+									Text="{Binding Name}"
 									FontFamily="Arial"
 									FontSize="18"/>
 						</Grid>

@@ -2,7 +2,7 @@
 
 namespace BuilderKIP.Models;
 
-public class Receipt
+public class Receipt 
 {
     public int Id { get; set; }
     public DateTime  DateTime { get; set; }

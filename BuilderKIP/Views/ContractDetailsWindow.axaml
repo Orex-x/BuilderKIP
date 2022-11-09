@@ -81,29 +81,22 @@
 										<Ellipse
 											Margin="20,0,0,0"
 											VerticalAlignment="Center"
-											Fill="{Binding Stage.Ellipse}"
+											Fill="{Binding Ellipse}"
 											Height="20"
 											Width="20"/>
 										<TextBlock
 											Margin="20,0,0,0"
 											VerticalAlignment="Center"
-											Text="{Binding Stage.Name}"
+											Text="{Binding Name}"
 											FontFamily="Arial"
 											FontSize="18"/>
 
 										<TextBlock
 											Margin="20,0,0,0"
 											VerticalAlignment="Center"
-											Text="{Binding Stage.Status}"
+											Text="{Binding Status}"
 											FontFamily="Arial"
 											FontSize="18"/>
-
-										<Button
-											Margin="20,0,0,0"
-											HorizontalAlignment="Right"
-											VerticalAlignment="Center"
-											Content="{Binding Stage.ActionName}"
-											Command="{Binding Action}"/>
 									</StackPanel>
 								</Grid>
 							</DataTemplate>

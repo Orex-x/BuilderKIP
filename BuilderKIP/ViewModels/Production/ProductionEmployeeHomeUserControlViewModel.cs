@@ -1,4 +1,5 @@
 ﻿using BuilderKIP.Models;
+using BuilderKIP.ViewModels.Engineer;
 using ReactiveUI;
 using Splat;
 using System.Collections.ObjectModel;
@@ -7,21 +8,18 @@ using System.Reactive.Linq;
 using System.Runtime.Serialization;
 using System.Windows.Input;
 
-namespace BuilderKIP.ViewModels.Engineer
+namespace BuilderKIP.ViewModels.Production
 {
     [DataContract]
-    public class EngineerEmployeeHomeUserControlViewModel : ReactiveObject, IRoutableViewModel
+    public class ProductionEmployeeHomeUserControlViewModel : ReactiveObject, IRoutableViewModel
     {
         #region ReactiveObject
         public IScreen HostScreen { get; }
 
-        public string UrlPathSegment => "/EngineerEmployeeHome";
+        public string UrlPathSegment => "/ProductionEmployeeHome";
 
         public IWindowContainer Container { get; private set; }
         #endregion
-
-
-        #region Fields
 
         private ObservableCollection<Contract> _contracts = new ObservableCollection<Contract>();
 
@@ -39,43 +37,39 @@ namespace BuilderKIP.ViewModels.Engineer
             set => this.RaiseAndSetIfChanged(ref _selectedContract, value);
         }
 
-        public Interaction<EngineerCreateStagesWindowViewModel, Contract?> ShowDialog { get; }
+        public Interaction<ProductionDiaryStagesWindowViewModel, Contract?> ShowDialog { get; }
 
-        #endregion
+
 
         #region ICommand  
         public ICommand ClickOpen { get; private set; }
 
         #endregion
 
+       
 
-        public EngineerEmployeeHomeUserControlViewModel(Employee employee, IWindowContainer container, IScreen screen = null)
+        public ProductionEmployeeHomeUserControlViewModel(Employee employee, IWindowContainer container, IScreen screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
             Container = container;
 
             ShowDialog = new();
 
-            Contracts = new(API.Client.Get<Contract>().Where(x => x.ContractStatus == ContractStatus.ACCEPT));
+            Contracts = new(API.Client.Get<Contract>().Where(x => x.ContractStatus == ContractStatus.PENDING));
 
             ClickOpen = ReactiveCommand.Create(async () =>
             {
                 if (SelectedContract != null)
                 {
-                    var store = new EngineerCreateStagesWindowViewModel(SelectedContract);
+                    var store = new ProductionDiaryStagesWindowViewModel(SelectedContract);
                     var contract = await ShowDialog.Handle(store);
                     if (contract != null)
                     {
-                        foreach (var item in contract.BuildingServiceContract.Stages)
-                        {
-                            item!.BuildingServiceContract = null;
-                            API.Client.Create(item);
-                        }
-                        contract.ContractStatus = ContractStatus.PENDING;
-                        API.Client.Update(contract);
+
                     }
                 }
             });
         }
+
     }
 }

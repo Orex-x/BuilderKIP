@@ -97,7 +97,7 @@ namespace BuilderKIP.ViewModels
                                     break;
                                 
                                 case Role.Production:
-
+                                    Container.GoToHomeProductionEmployee(employee);
                                     break;
                                 
                                 case Role.Technical:

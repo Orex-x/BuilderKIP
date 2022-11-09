@@ -1,16 +1,9 @@
-﻿using Avalonia.Media.TextFormatting;
-using BuilderKIP.Models;
-using BuilderKIP.ViewModels.ProjectDocumentationPages;
+﻿using BuilderKIP.Models;
 using ReactiveUI;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Metrics;
-using System.Linq;
 using System.Reactive;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace BuilderKIP.ViewModels.Engineer
@@ -34,12 +27,12 @@ namespace BuilderKIP.ViewModels.Engineer
 
         public ICommand OnClickAddStagesViewModel { get; private set; }
         
-        private ObservableCollection<StagesViewModel> _stagesViewModels = new ObservableCollection<StagesViewModel>();
+        private ObservableCollection<Stage> _stages = new ObservableCollection<Stage>();
 
-        public ObservableCollection<StagesViewModel> StagesViewModels
+        public ObservableCollection<Stage> Stages
         {
-            get => _stagesViewModels;
-            set => this.RaiseAndSetIfChanged(ref _stagesViewModels, value);
+            get => _stages;
+            set => this.RaiseAndSetIfChanged(ref _stages, value);
         }
 
 
@@ -65,7 +58,7 @@ namespace BuilderKIP.ViewModels.Engineer
 
                 contract.BuildingServiceContract.Stages.Add(stage);
 
-                StagesViewModels.Add(new StagesViewModel(stage));
+                Stages.Add(stage);
             });
         }
     }
