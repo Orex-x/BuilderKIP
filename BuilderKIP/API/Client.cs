@@ -34,7 +34,6 @@ namespace BuilderKIP.API
             public static string PUT = "PUT";
         }
 
-
         public static string GenerateURI<T>(CRUD CRUD)
         {
             return $"https://{_host}:{_port}/api/easydata/models/__default/sources/{typeof(T).Name}/{CRUD}";
@@ -70,7 +69,6 @@ namespace BuilderKIP.API
                 return ee.ToString();
             }
         }
-
 
         public static User Authorization(string login, string password)
         {
@@ -171,7 +169,6 @@ namespace BuilderKIP.API
             }
             return false;
         }
-
 
     }
 }
