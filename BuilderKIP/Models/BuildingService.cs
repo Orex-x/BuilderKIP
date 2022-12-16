@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace BuilderKIP.Models;
 
 public class BuildingService

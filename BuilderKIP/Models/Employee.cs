@@ -17,7 +17,7 @@ public class Employee
     public string PassportNumber { get; set; }
 
     public Role Role { get; set; }
-    
+
     public int UserId { get; set; }
     public virtual User User { get; set; }
 }

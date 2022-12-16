@@ -1,16 +1,9 @@
 ﻿using BuilderKIP.Models;
 using ReactiveUI;
 using Splat;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace BuilderKIP.ViewModels.ProjectDocumentationPages
 {
@@ -128,7 +121,7 @@ namespace BuilderKIP.ViewModels.ProjectDocumentationPages
 
         #endregion
 
-        public MainDocumentationUserControlViewModel(Contract contract, IWindowContainerProjectDocumentation container, IScreen screen = null)
+        public MainDocumentationUserControlViewModel (Contract contract, IWindowContainerProjectDocumentation container, IScreen? screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
             Container = container;

@@ -1,15 +1,10 @@
 ﻿using BuilderKIP.Models;
-using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuilderKIP.API
 {
@@ -17,7 +12,7 @@ namespace BuilderKIP.API
     {
         private const string _port = "7003";
         private const string _host = "localhost";
-
+       
         public enum CRUD
         {
             create,
@@ -40,7 +35,7 @@ namespace BuilderKIP.API
             return $"https://{_host}:{_port}/api/easydata/models/__default/sources/{typeof(T).Name}/{CRUD}";
         }
 
-        static string sendRequest(string body, string uri, string method)
+        static string sendRequest(string? body, string uri, string method)
         {
             try
             {
@@ -48,7 +43,7 @@ namespace BuilderKIP.API
                 httpWebRequest.ContentType = "application/json; charset=utf-8";
                 httpWebRequest.Method = method;
 
-                if (body.Length > 0)
+                if (body?.Length > 0)
                 {
                     using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                     {
@@ -93,16 +88,17 @@ namespace BuilderKIP.API
             return null;
         }
 
-        public static List<T> Get<T>()
+        public static List<T>? Get<T>()
         {
             try
             {
                 string uri = GenerateURI<T>(CRUD.get);
-                string json = sendRequest("", uri, Method.POST);
+                string json = sendRequest(null, uri, Method.POST);
                 return JsonConvert.DeserializeObject<List<T>>(json);
             }
-            catch(Exception ex)
+            catch(Exception e)
             {
+               
 
             } 
             return null;

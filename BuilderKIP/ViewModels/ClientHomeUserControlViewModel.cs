@@ -1,18 +1,10 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using BuilderKIP.Models;
 using ReactiveUI;
 using Splat;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Linq;
-using System.Reactive.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Contract = BuilderKIP.Models.Contract;
 
 namespace BuilderKIP.ViewModels
 {

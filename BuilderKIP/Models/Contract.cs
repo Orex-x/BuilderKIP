@@ -18,14 +18,14 @@ public class Contract
     public int Id { get; set; }
 
     public string Number { get; set; }
-    
+
     public string Address { get; set; }
 
     public DateTime DeadLine { get; set; }
 
     public int? ClientId { get; set; } = null;
     public virtual Client Client { get; set; }
-    
+
     public int? EmployeeId { get; set; } = null;
     public virtual Employee? Employee { get; set; }
 
@@ -37,7 +37,7 @@ public class Contract
 
     public int BuildingServiceContractId { get; set; }
     public BuildingServiceContract BuildingServiceContract { get; set; }
-    
+
     public int? ReceiptId { get; set; } = null;
     public virtual Receipt? Receipt { get; set; }
 
@@ -62,7 +62,7 @@ public class Contract
 
     public int GetProcces()
     {
-        if(BuildingServiceContract.Stages != null)
+        if (BuildingServiceContract.Stages != null)
         {
             int sum = BuildingServiceContract.Stages.Count;
             int sumAccept = BuildingServiceContract.Stages.ToList().Where(x => x.Status == "Выполнен").ToList().Count;
@@ -73,18 +73,18 @@ public class Contract
 
     public int GetSumMaterials()
     {
-        if(BuildingServiceContract.Materials != null)
+        if (BuildingServiceContract.Materials != null)
         {
             int sum = 0;
-            foreach(var item in BuildingServiceContract.Materials)
+            foreach (var item in BuildingServiceContract.Materials)
             {
                 sum += item.Material.Price * item.Amount;
             }
             return sum;
         }
         return 0;
-    }  
-    
+    }
+
     public int GetSumServices()
     {
         if (BuildingServiceContract.BuildingService != null)
@@ -92,8 +92,8 @@ public class Contract
             return BuildingServiceContract.BuildingService.Price;
         }
         return 0;
-    }  
-    
+    }
+
     public int GetSum()
     {
         return GetSumMaterials() + GetSumServices();

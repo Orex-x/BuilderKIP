@@ -1,6 +1,5 @@
 ﻿using BuilderKIP.Models;
 using ReactiveUI;
-using System;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using System.Windows.Input;
@@ -76,7 +75,7 @@ namespace BuilderKIP.ViewModels
             ToPay = ReactiveCommand.Create(() =>
             {
                 int sum = contract.GetSum();
-                if(sum <= client.Balance)
+                if (sum <= client.Balance)
                 {
                     client.Balance = client.Balance - sum;
                     API.Client.Update(client);

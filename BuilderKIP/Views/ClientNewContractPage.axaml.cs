@@ -1,11 +1,9 @@
 using Avalonia.Controls;
-using Avalonia.Threading;
-using System.Threading.Tasks;
-using System;
-using BuilderKIP.ViewModels;
-using ReactiveUI;
 using Avalonia.Media;
 using BuilderKIP.Models;
+using BuilderKIP.ViewModels;
+using ReactiveUI;
+using System.Threading.Tasks;
 
 namespace BuilderKIP.Views
 {

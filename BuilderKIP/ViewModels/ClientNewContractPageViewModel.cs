@@ -2,9 +2,7 @@
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
-using System.Reactive.Joins;
 using System.Reactive.Linq;
-using System.Reflection;
 using System.Windows.Input;
 
 namespace BuilderKIP.ViewModels

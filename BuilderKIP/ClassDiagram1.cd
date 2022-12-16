@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="BuilderKIP.Models.EstimateViewModel">
+    <Position X="1.5" Y="2.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAACAAAAABQAAQAAAAAAAAAAACAAAgAAAA=</HashCode>
+      <FileName>Models\EstimateViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuilderKIP.Models.Stage">
+    <Position X="6.75" Y="2.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AEAiIAAGEQACAAAAIAAAAAQAgAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\Stage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="BuilderKIP.Models.Contract">
+    <Position X="12" Y="2.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>QAACAAABEQAAAAAAgEBAIBAECAAIAIACACAABAASAAQ=</HashCode>
+      <FileName>Models\Contract.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuilderKIP.ViewModels.ClientNewContractPageViewModel">
+    <Position X="7.25" Y="9.5" Width="10.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQgAAAAAAAAAEAgAAQEAAiCAEAAkAQAAA=</HashCode>
+      <FileName>ViewModels\ClientNewContractPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

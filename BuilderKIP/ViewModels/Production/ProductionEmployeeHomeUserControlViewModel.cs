@@ -1,5 +1,4 @@
 ﻿using BuilderKIP.Models;
-using BuilderKIP.ViewModels.Engineer;
 using ReactiveUI;
 using Splat;
 using System.Collections.ObjectModel;

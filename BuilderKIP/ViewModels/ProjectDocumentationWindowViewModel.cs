@@ -2,7 +2,6 @@
 using BuilderKIP.ViewModels.ProjectDocumentationPages;
 using ReactiveUI;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Metrics;
 using System.Reactive;
 using System.Runtime.Serialization;
 
