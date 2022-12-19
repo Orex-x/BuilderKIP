@@ -45,6 +45,7 @@ namespace BuilderKIP.ViewModels.Engineer
 
         #region ICommand  
         public ICommand ClickOpen { get; private set; }
+        public ICommand ClickLogOut { get; private set; }
 
         #endregion
 
@@ -58,6 +59,11 @@ namespace BuilderKIP.ViewModels.Engineer
 
             Contracts = new(API.Client.Get<Contract>().Where(x => x.ContractStatus == ContractStatus.ACCEPT));
 
+            ClickLogOut = ReactiveCommand.Create(async () =>
+            {
+                container.GoBack();
+            });
+
             ClickOpen = ReactiveCommand.Create(async () =>
             {
                 if (SelectedContract != null)
@@ -69,7 +75,7 @@ namespace BuilderKIP.ViewModels.Engineer
                         foreach (var item in contract.BuildingServiceContract.Stages)
                         {
                             item!.BuildingServiceContract = null;
-                            API.Client.Create(item);
+                           // API.Client.Create(item);
                         }
                         contract.ContractStatus = ContractStatus.PENDING;
                         API.Client.Update(contract);

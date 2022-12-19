@@ -34,6 +34,7 @@ namespace BuilderKIP.ViewModels
             set => this.RaiseAndSetIfChanged(ref _txtBalance, value);
         }
         public ICommand Deposit { get; set; }
+        public ICommand ClickLogOut { get; set; }
        
 
         public ClientHomeUserControlViewModel(Client client, IWindowContainer container, IScreen screen = null)
@@ -49,6 +50,11 @@ namespace BuilderKIP.ViewModels
             {
                 client.Balance += Convert.ToInt32(TxtBalance);
                 API.Client.Update(client);
+            });
+
+            ClickLogOut = ReactiveCommand.Create(() =>
+            {
+                container.GoBack();
             });
         }
 

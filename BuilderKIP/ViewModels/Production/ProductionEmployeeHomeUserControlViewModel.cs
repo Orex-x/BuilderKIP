@@ -42,6 +42,7 @@ namespace BuilderKIP.ViewModels.Production
 
         #region ICommand  
         public ICommand ClickOpen { get; private set; }
+        public ICommand ClickLogOut { get; private set; }
 
         #endregion
 
@@ -55,6 +56,11 @@ namespace BuilderKIP.ViewModels.Production
             ShowDialog = new();
 
             Contracts = new(API.Client.Get<Contract>().Where(x => x.ContractStatus == ContractStatus.PENDING));
+
+            ClickLogOut = ReactiveCommand.Create(async () =>
+            {
+                container.GoBack();
+            });
 
             ClickOpen = ReactiveCommand.Create(async () =>
             {

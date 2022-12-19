@@ -11,13 +11,14 @@
 				<Grid.RowDefinitions>
 					<RowDefinition Height="50"/>
 					<RowDefinition Height="30"/>
+					<RowDefinition Height="30"/>
 				</Grid.RowDefinitions>
 			
 
 				<Grid Grid.Row="0">
 					<StackPanel  Orientation="Horizontal">
 						<TextBlock Text="Текущий баланс: " VerticalAlignment="Center"/>
-						<TextBlock Text="{Binding Client.Balance}"/>
+						<TextBlock Text="{Binding Client.Balance}"  VerticalAlignment="Center"/>
 					</StackPanel>
 				</Grid>
 
@@ -28,6 +29,11 @@
 						<Button Command="{Binding Deposit}" Content="Внести"/>
 					</StackPanel>
 				</Grid>
+
+				<Grid Grid.Row="2">
+					<Button Content="Выйти" Command="{Binding ClickLogOut}"/>
+				</Grid>
+
 			</Grid>
 		</TabItem>
 		<TabItem Header="Договоры" VerticalContentAlignment="Center">

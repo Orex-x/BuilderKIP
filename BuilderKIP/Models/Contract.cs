@@ -64,9 +64,17 @@ public class Contract
     {
         if (BuildingServiceContract.Stages != null)
         {
-            int sum = BuildingServiceContract.Stages.Count;
-            int sumAccept = BuildingServiceContract.Stages.ToList().Where(x => x.Status == "Выполнен").ToList().Count;
-            return sumAccept * 100 / sum;
+            try
+            {
+                int sum = BuildingServiceContract.Stages.Count;
+                int sumAccept = BuildingServiceContract.Stages.ToList().Where(x => x.Status == "Выполнен").ToList().Count;
+                return sumAccept * 100 / sum;
+            }
+            catch(DivideByZeroException ex)
+            {
+
+            }
+          
         }
         return 0;
     }
